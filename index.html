@@ -46,7 +46,22 @@
 }
 
 
+function ligarRaiding() {
+    const janela = document.getElementById('janelaVideo');
+    const video = document.getElementById('meuVideo');
+    
+    janela.style.display = 'flex'; // Mostra a janela
+    video.play(); // Dá o play sozinho
+}
 
+function desligarRaiding() {
+    const janela = document.getElementById('janelaVideo');
+    const video = document.getElementById('meuVideo');
+    
+    janela.style.display = 'none'; // Esconde
+    video.pause(); // Pausa o som
+    video.currentTime = 0; // Volta pro início
+}
 
 
 
