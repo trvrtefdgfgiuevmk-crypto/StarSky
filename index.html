@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CabralDev - Official Page</title>
     <style>
+        /* CONFIGURAÇÕES GERAIS */
         * {
             margin: 0;
             padding: 0;
@@ -12,74 +13,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-
- <style>
-.btn-cabral {
-    background: #222;
-    color: #ff0000;
-    padding: 10px 20px;
-    border: 2px solid #ff0000;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.overlay {
-    display: none; /* Escondido */
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
-    z-index: 999;
-    justify-content: center;
-    align-items: center;
-}
-
-.caixa-video {
-    width: 80%;
-    max-width: 700px;
-    position: relative;
-}
-
-.fechar {
-    position: absolute;
-    top: -30px; right: 0;
-    color: white; font-size: 30px; cursor: pointer;
-}
-
-
-function ligarRaiding() {
-    const janela = document.getElementById('janelaVideo');
-    const video = document.getElementById('meuVideo');
-    
-    janela.style.display = 'flex'; // Mostra a janela
-    video.play(); // Dá o play sozinho
-}
-
-function desligarRaiding() {
-    const janela = document.getElementById('janelaVideo');
-    const video = document.getElementById('meuVideo');
-    
-    janela.style.display = 'none'; // Esconde
-    video.pause(); // Pausa o som
-    video.currentTime = 0; // Volta pro início
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
         body {
-            /* Atualizado para .png conforme o seu arquivo */
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                         url('pilha_dinheiro.png'); 
             background-size: cover;
             background-position: center;
@@ -92,6 +27,7 @@ function desligarRaiding() {
             overflow: hidden;
         }
 
+        /* CONTAINER PRINCIPAL */
         .container {
             background: rgba(20, 20, 20, 0.9);
             padding: 40px;
@@ -104,25 +40,6 @@ function desligarRaiding() {
             animation: neonPulse 3s infinite alternate;
         }
 
-
-
-
-
-<button onclick="ligarRaiding()" class="btn-cabral">
-    C̷a̷b̷r̷a̷l̷D̷e̷v̷💤 Raiding Servers
-</button>
-
-<div id="janelaVideo" class="overlay">
-    <div class="caixa-video">
-        <span class="fechar" onclick="desligarRaiding()">&times;</span>
-        <video id="meuVideo" width="100%">
-            <source src="Video_test.mp4" type="video/mp4">
-            Seu navegador não suporta vídeo.
-        </video>
-    </div>
-</div>
-
-
         @keyframes neonPulse {
             from { border-color: #ff0000; box-shadow: 0 0 20px #ff0000; }
             to { border-color: #8a2be2; box-shadow: 0 0 30px #8a2be2; }
@@ -132,20 +49,20 @@ function desligarRaiding() {
             font-size: 32px;
             margin-bottom: 5px;
             letter-spacing: 2px;
-            color: #fff;
         }
 
         .owner-text {
             font-size: 18px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             opacity: 0.8;
         }
 
+        /* ESTILO DOS BOTÕES */
         .btn {
             display: block;
             width: 100%;
-            padding: 18px;
-            margin: 12px 0;
+            padding: 15px;
+            margin: 10px 0;
             border: none;
             border-radius: 12px;
             color: white;
@@ -153,18 +70,9 @@ function desligarRaiding() {
             cursor: pointer;
             transition: 0.3s;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 14px;
             text-transform: uppercase;
             text-align: center;
-        }
-
-        .btn-enter {
-            background: #5865F2; /* Azul Discord */
-        }
-
-        .btn-copy {
-            background: #111;
-            border: 1px solid #333;
         }
 
         .btn:hover {
@@ -172,12 +80,45 @@ function desligarRaiding() {
             filter: brightness(1.2);
         }
 
+        .btn-enter { background: #5865F2; } /* Discord */
+        .btn-copy { background: #111; border: 1px solid #333; }
+        
+        /* BOTÃO DO VÍDEO (ESTILO CABRAL) */
+        .btn-cabral {
+            background: #222;
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            margin-top: 10px;
+        }
+
+        /* JANELA DO VÍDEO (OVERLAY) */
+        .overlay {
+            display: none; 
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .caixa-video {
+            width: 90%;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .fechar {
+            position: absolute;
+            top: -40px; right: 0;
+            color: white; font-size: 40px; cursor: pointer;
+        }
+
         .footer-tag {
             margin-top: 25px;
             color: #ff0000;
             font-weight: bold;
-            font-size: 14px;
-            text-shadow: 0 0 5px rgba(255,0,0,0.5);
+            font-size: 13px;
         }
     </style>
 </head>
@@ -195,15 +136,46 @@ function desligarRaiding() {
             ADD BOT IN YOUR SERVER
         </button>
 
+        <button onclick="ligarRaiding()" class="btn btn-cabral">
+            C̷a̷b̷r̷a̷l̷D̷e̷v̷💤 Raiding Servers
+        </button>
+
         <div class="footer-tag">MADE BY CABRALDEV</div>
     </div>
 
+    <div id="janelaVideo" class="overlay">
+        <div class="caixa-video">
+            <span class="fechar" onclick="desligarRaiding()">&times;</span>
+            <video id="meuVideo" width="100%" controls>
+                <source src="Video_test.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+            </video>
+        </div>
+    </div>
+
     <script>
+        // Função para copiar link
         function copyLink() {
-            const link = "https://discord.com/oauth2/authorize?client_id=1479937612738330705&permissions=8&integration_type=0&scope=bot";
+            const link = "https://discord.com/oauth2/authorize?client_id=1479937612738330705&permissions=8&scope=bot";
             navigator.clipboard.writeText(link).then(() => {
-                alert("ADDING");
+                alert("Copied!");
             });
+        }
+
+        // Funções do Vídeo
+        function ligarRaiding() {
+            const janela = document.getElementById('janelaVideo');
+            const video = document.getElementById('meuVideo');
+            janela.style.display = 'flex';
+            video.play();
+        }
+
+        function desligarRaiding() {
+            const janela = document.getElementById('janelaVideo');
+            const video = document.getElementById('meuVideo');
+            janela.style.display = 'none';
+            video.pause();
+            video.currentTime = 0;
         }
     </script>
 
