@@ -14,6 +14,7 @@
         }
 
         body {
+            /* Fundo com a imagem de dinheiro que você usa */
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                         url('pilha_dinheiro.png'); 
             background-size: cover;
@@ -27,9 +28,9 @@
             overflow: hidden;
         }
 
-        /* CONTAINER PRINCIPAL */
+        /* CONTAINER PRINCIPAL (A CAIXA PRETA) */
         .container {
-            background: rgba(20, 20, 20, 0.9);
+            background: rgba(20, 20, 20, 0.95);
             padding: 40px;
             border-radius: 25px;
             text-align: center;
@@ -61,8 +62,8 @@
         .btn {
             display: block;
             width: 100%;
-            padding: 15px;
-            margin: 10px 0;
+            padding: 16px;
+            margin: 12px 0;
             border: none;
             border-radius: 12px;
             color: white;
@@ -80,18 +81,17 @@
             filter: brightness(1.2);
         }
 
-        .btn-enter { background: #5865F2; } /* Discord */
+        .btn-enter { background: #5865F2; } /* Azul Discord */
         .btn-copy { background: #111; border: 1px solid #333; }
         
-        /* BOTÃO DO VÍDEO (ESTILO CABRAL) */
+        /* Botão estilizado para o Vídeo */
         .btn-cabral {
             background: #222;
             color: #ff0000;
             border: 2px solid #ff0000;
-            margin-top: 10px;
         }
 
-        /* JANELA DO VÍDEO (OVERLAY) */
+        /* JANELA DO VÍDEO (MODAL) */
         .overlay {
             display: none; 
             position: fixed;
@@ -104,14 +104,14 @@
 
         .caixa-video {
             width: 90%;
-            max-width: 700px;
+            max-width: 750px;
             position: relative;
         }
 
         .fechar {
             position: absolute;
-            top: -40px; right: 0;
-            color: white; font-size: 40px; cursor: pointer;
+            top: -45px; right: 0;
+            color: white; font-size: 45px; cursor: pointer;
         }
 
         .footer-tag {
@@ -132,7 +132,7 @@
             ENTER DISCORD SERVER
         </a>
 
-        <button class="btn btn-copy" onclick="copyLink()">
+        <button class="btn btn-copy" onclick="abrirBot()">
             ADD BOT IN YOUR SERVER
         </button>
 
@@ -154,15 +154,13 @@
     </div>
 
     <script>
-        // Função para copiar link
-        function copyLink() {
+        // Abre o link do Bot em nova aba
+        function abrirBot() {
             const link = "https://discord.com/oauth2/authorize?client_id=1479937612738330705&permissions=8&scope=bot";
-            navigator.clipboard.writeText(link).then(() => {
-                alert("Copied!");
-            });
+            window.open(link, '_blank');
         }
 
-        // Funções do Vídeo
+        // Função para mostrar o vídeo e dar play
         function ligarRaiding() {
             const janela = document.getElementById('janelaVideo');
             const video = document.getElementById('meuVideo');
@@ -170,6 +168,7 @@
             video.play();
         }
 
+        // Função para fechar o vídeo e resetar
         function desligarRaiding() {
             const janela = document.getElementById('janelaVideo');
             const video = document.getElementById('meuVideo');
