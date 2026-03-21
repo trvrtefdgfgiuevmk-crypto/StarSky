@@ -6,33 +6,27 @@
     <title>CabralDev - Official Page</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-
         body {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('pilha_dinheiro.png'); 
             background-size: cover; background-position: center; background-attachment: fixed;
             height: 100vh; display: flex; justify-content: center; align-items: center; color: white; overflow: hidden;
         }
-
         .container {
             background: rgba(20, 20, 20, 0.95); padding: 40px; border-radius: 25px; text-align: center;
             max-width: 450px; width: 90%; border: 4px solid #ff0000;
             box-shadow: 0 0 30px rgba(255, 0, 0, 0.6); animation: neonPulse 3s infinite alternate;
         }
-
         @keyframes neonPulse {
             from { border-color: #ff0000; box-shadow: 0 0 20px #ff0000; }
             to { border-color: #8a2be2; box-shadow: 0 0 30px #8a2be2; }
         }
-
-        h1 { font-size: 32px; margin-bottom: 5px; letter-spacing: 2px; }
+        h1 { font-size: 32px; margin-bottom: 5px; }
         .owner-text { font-size: 18px; margin-bottom: 25px; opacity: 0.8; }
-
         .btn {
             display: block; width: 100%; padding: 16px; margin: 12px 0; border: none;
             border-radius: 12px; color: white; font-weight: bold; cursor: pointer;
             transition: 0.3s; text-decoration: none; font-size: 14px; text-transform: uppercase; text-align: center;
         }
-
         .btn:hover { transform: scale(1.03); filter: brightness(1.2); }
         .btn-enter { background: #5865F2; }
         .btn-copy { background: #111; border: 1px solid #333; }
@@ -41,12 +35,10 @@
         /* JANELA DO VÍDEO */
         .overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 999; justify-content: center; align-items: center;
+            background: rgba(0,0,0,0.9); z-index: 999; justify-content: center; align-items: center;
         }
-
-        .caixa-video { width: 90%; max-width: 750px; position: relative; background: #000; border-radius: 10px; overflow: hidden; }
-        .fechar { position: absolute; top: 10px; right: 20px; color: white; font-size: 40px; cursor: pointer; z-index: 1001; }
-        
+        .caixa-video { width: 90%; max-width: 700px; position: relative; background: #000; }
+        .fechar { position: absolute; top: -45px; right: 0; color: white; font-size: 40px; cursor: pointer; }
         .footer-tag { margin-top: 25px; color: #ff0000; font-weight: bold; font-size: 13px; }
     </style>
 </head>
@@ -57,7 +49,7 @@
         <p class="owner-text">The best bot and best server</p>
 
         <a href="https://discord.gg/CNB6YBhBe2" target="_blank" class="btn btn-enter">ENTER DISCORD SERVER</a>
-
+        
         <button class="btn btn-copy" onclick="abrirBot()">ADD BOT IN YOUR SERVER</button>
 
         <button onclick="ligarRaiding()" class="btn btn-cabral">C̷a̷b̷r̷a̷l̷D̷e̷v̷💤 Raiding Servers</button>
@@ -68,7 +60,7 @@
     <div id="janelaVideo" class="overlay">
         <div class="caixa-video">
             <span class="fechar" onclick="desligarRaiding()">&times;</span>
-            <video id="meuVideo" width="100%" controls playsinline>
+            <video id="meuVideo" width="100%" controls playsinline muted>
                 <source src="Video_test.mp4" type="video/mp4">
                 Seu navegador não suporta vídeo.
             </video>
@@ -85,11 +77,7 @@
             const janela = document.getElementById('janelaVideo');
             const video = document.getElementById('meuVideo');
             janela.style.display = 'flex';
-            
-            // Tenta dar play e captura erro se o navegador bloquear
-            video.play().catch(error => {
-                console.log("Play automático bloqueado. O usuário precisa clicar no play.");
-            });
+            video.play();
         }
 
         function desligarRaiding() {
@@ -98,12 +86,6 @@
             janela.style.display = 'none';
             video.pause();
             video.currentTime = 0;
-        }
-
-        // Fecha se clicar fora do vídeo
-        window.onclick = function(event) {
-            const janela = document.getElementById('janelaVideo');
-            if (event.target == janela) { desligarRaiding(); }
         }
     </script>
 </body>
